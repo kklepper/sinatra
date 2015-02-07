@@ -90,9 +90,15 @@ I still experimented, but nothing changed, and after a soft reboot, I expected t
 
 <p> As far as I remember, I managed to set up a complex <code>LAMP</code> project with 5 containers, each one for <code>memcached</code>, <code>Apache/PHP</code>, and 3 for <code>MySQL</code>, just as an exercise. <code>MaxScale</code> was very fresh then, I planned to construct a database load balancing with it, there were alternatives also for this purpose the name of which I don't remember right now, but none of them produced satisfying results. And then something else required my attention full-time so that I dropped the whole study for the time being. <br><br>
 
-To make things look proper, we just use an old trick:</p>
+To make things look proper, we just use an old trick and soft link the directory <code>/c/Users/WERNER/vagrant</code> to the "directory" <code>/home/docker/vagrant</code>:</p>
 
 <p><img src="images/ln.png" alt="Docker" /></p>
+
+<h2>git doesn't like that</h2>
+
+<p>I write this in the directory <code>/c/Users/WERNER/sinatra</code>, which in turn is coupled with my Github repository <code>sinatra</code> which in turn is coupled with my docker repository <code>sinatra_debian</code>. <br><br>
+
+So set things straight, I soft link this one to <code>/home/docker/sinatra</code> as well and change to this directory. Having produced another image, I expected git to add this new image from the soft link. I was wrong. git cannot do that. I have to return to the original directory in order to add and commit and push. Oh boy!</p>
 
 <h2>The benefit</h2>
 
