@@ -79,20 +79,11 @@ I still experimented, but nothing changed, and after a soft reboot, I expected t
 
 <h2>A workaround</h2>
 
-<p>I finally gave up and decided to move the content of my vagrant folder to <code>C:\Users\WERNER\vagrant</code>, a subdirectory I created in my user folder, <strong>WERNER</strong> being the current user name on my new 64-bit machine, having <em>32584 elements</em> with <em>3,73 GB</em> -- I have no idea, what I have done there, but it sure is proof that I invested an awful lot of time and energy back then.</p>
-
-<p><img src="images/copy.png" alt="Docker" /></p>
-
-<p> And here you can see the directory structure I set up a year ago; I started with Docker 0.8.1, used 0.9.0 and finally 0.9.1. <strong>Tutum</strong> was very new then, I was interested in <code>LAMP</code>, and the <code>ppr</code> file tells you that my favorite editor is <strong>PSPad</strong> -- the only one I know capable of correctly presenting PHP class structures -- this is a PSPad project file. In addition you can see, that I am a late hour worker and that the <code>ppr</code> file has been created in March 2014.</p>
-
-
-<p><img src="images/vagrant.png" alt="Docker" /></p>
+<p>I finally gave up and decided to move the content of my vagrant folder to <code>C:\Users\WERNER\vagrant</code>, a subdirectory I created in my user folder, WERNER being the current user name on my new 64-bit machine, having <em>32584 elements</em> with <em>3,73 GB</em> -- no idea, what I have done there, but it sure is proof that I invested an awful lot of time and energy back then.</p>
 
 <p> As far as I remember, I managed to set up a complex <code>LAMP</code> project with 5 containers, each one for <code>memcached</code>, <code>Apache/PHP</code>, and 3 for <code>MySQL</code>, just as an exercise. <code>MaxScale</code> was very fresh then, I planned to construct a database load balancing with it, there were alternatives also for this purpose the name of which I don't remember right now, but none of them produced satisfying results. And then something else required my attention full-time so that I dropped the whole study for the time being. <br><br>
 
 To make things look proper, we just use an old trick and soft link the directory <code>/c/Users/WERNER/vagrant</code> to the "directory" <code>/home/docker/vagrant</code>:</p>
-
-<p><img src="images/ln.png" alt="Docker" /></p>
 
 <h2>git doesn't like that</h2>
 
@@ -100,11 +91,11 @@ To make things look proper, we just use an old trick and soft link the directory
 
 To set things straight, I soft link this one to <code>/home/docker/sinatra</code> as well and change to this directory. <br><br>
 
-Having produced another image, I expected git to add this new image from the soft link. I was wrong. git cannot do that. I have to return to the original directory in order to add and commit and push. Oh boy!</p>
+Having produced another image, I expected git to add this new image from the soft link. I was wrong. git cannot do that. I have to return to the original directory in order to <code>add</code> and <code>commit</code> and <code>push</code>. Oh boy!</p>
 
 <h2>The benefit</h2>
 
-<p> With this solution in place, I can use all my windows tools I am productive with and keep the results outside of the temporary VirtualBox scenery, as it did last year, which is the reason why I had no trouble finding my workbase without starting VirtualBox. <br><br>
+<p> With this solution in place, I can use all my Windows tools I am productive with and keep the results outside of the temporary VirtualBox scenery, as I did last year, which is the reason why I had no trouble finding my workbase without starting VirtualBox without the need to push everything to the cloud. <br><br>
 
 Just to let you know: I am clever enough to work with vi, but frankly this is not what I understand as a boost in productivity, to not speak of simple manipulation of graphic objects within VirtualBox like the illustrations in this article. <br><br>
 
