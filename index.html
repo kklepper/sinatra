@@ -65,7 +65,7 @@ Next I exited and restarted and VirtualBox showed my corrected setting <code>D:\
 
 So -- before we proceed, let me state this very clearly -- by way of construction VirtualBox gives you <code>a common Windows folder</code> for free -- something a lot of people want to have, according to Google, and nobody seems to notice that it's already there. <br><br>
 
-The only thing I wanted to have is a <i>different</i> folder. It's a matter of taste more or less, but if you think about it, the right structure helps you keep your thoughts straight. You wouldn't like to put things in areas they don't belong, so this isn't a small deal after all. Shouldn't be too complicated, as they offer it already. After all its an Oracle product. Should work as advertised.<br><br>
+The only thing I wanted to have is a <em>different</em> folder. It's a matter of taste more or less, but if you think about it, the right structure helps you keep your thoughts straight. You wouldn't like to put things in areas they don't belong, so this isn't a small deal after all. Shouldn't be too complicated, as they offer it already. After all its an Oracle product. Should work as advertised.<br><br>
 
 I still experimented, but nothing changed, and after a soft reboot, I expected to see <code>C:\Users</code>> again, but surprisingly VirtualBox showed two shared folders, both <code>C:\Users</code> <strong>and</strong> <code>D:\vagrant</code>. </p>
 
@@ -77,7 +77,9 @@ I still experimented, but nothing changed, and after a soft reboot, I expected t
 <p>By the way, you can see the <code>IP address</code> the VirtualBox can be addressed in this opening screen: <code>192.168.59.103</code>. It may happen that this number changes to 192.168.59.104, if you exit and restart, so if you get a connection error in your browser calling 192.168.59.103, watch here.
 </p>
 
-<p>I finally gave up and decided to move the content of my vagrant folder to <code>C:\Users\WERNER\vagrant</code>, a subdirectory I created in my user folder, <strong>WERNER</strong> being the current user name on my new 64-bit machine, having <strong>32584 elements</strong> with <strong>3,73 GB</strong> -- I have no idea, what I have done there, but it sure is proof that I invested an awful lot of time and energy back then.</p>
+<h2>A workaround</h2>
+
+<p>I finally gave up and decided to move the content of my vagrant folder to <code>C:\Users\WERNER\vagrant</code>, a subdirectory I created in my user folder, <strong>WERNER</strong> being the current user name on my new 64-bit machine, having <em>32584 elements</em> with <em>3,73 GB</em> -- I have no idea, what I have done there, but it sure is proof that I invested an awful lot of time and energy back then.</p>
 
 <p><img src="images/copy.png" alt="Docker" /></p>
 
@@ -88,7 +90,13 @@ I still experimented, but nothing changed, and after a soft reboot, I expected t
 
 <p> As far as I remember, I managed to set up a complex <code>LAMP</code> project with 5 containers, each one for <code>memcached</code>, <code>Apache/PHP</code>, and 3 for <code>MySQL</code>, just as an exercise. <code>MaxScale</code> was very fresh then, I planned to construct a database load balancing with it, there were alternatives also for this purpose the name of which I don't remember right now, but none of them produced satisfying results. And then something else required my attention full-time so that I dropped the whole study for the time being. </p>
 
-<p> I came back now because I wanted to investigate <code>Chicago Boss</code>, an Erlang framework which should run on Windows but didn't. So my idea was to continue in VirtualBox. Also, I wanted to know which database would be the best for me to use, and stumbled upon <code>VoltDB</code> which had a demonstration using <code>boot2docker</code>, so I was already set. And then I realized that I had forgotten everything about VirtualBox and Docker, so I stepped back and started with the Docker tutorial again, which also has improved a lot. <br><br>
+<h2>The benefit</h2>
+
+<p> With this solution in place, I can use all my windows tools I am productive with and keep the results outside of the temporary VirtualBox scenery, as it did last year, which is the reason why I had no trouble finding my workbase without starting VirtualBox. <br><br>
+
+Just to let you know: I am clever enough to work with vi, but frankly this is not what I understand as a boost in productivity, to not speak of simple manipulation of graphic objects within VirtualBox like the illustrations in this article. <br><br>
+
+This gives you an idea of the need of a common folder. For example, I would have hated to type this text character for character, although I'm not slow -- it is just tedious and unproductive. Instead, I prefer to dictate. It's easy, if you are on Windows. And it's great, if you get it in VirtualBox as well. </p>
 
 Enough for today, let me tell you tomorrow how to cope with the <strong>ssh error</strong> some people were complaining of, which hit me as well. </p>
 
