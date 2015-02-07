@@ -33,15 +33,25 @@
         <section id="main_content">
           <h3>First steps</h3>
 
-<p>I decided to jot down my experiences with Docker after noticing that I had forgotten most of the details I was very proficient with a year ago. Back then when I quit, <code>boot2docker</code> had just been invented, but I didn't use it anymore, because other things kept me busy. Consequently, I had to set up <strong>VirtualBox</strong> and <strong>Vagrant</strong> manually. It's all different now, very easy and much more efficiently.</p>
+<p>I decided to jot down my experiences with Docker after noticing that I had forgotten most of the details I was very proficient with a year ago. <br><br>
 
-<p>Also, I set up a new machine with Windows 7 64-bit recently, so everything I did last year had to be moved to the new machine. As I worked with <strong>Dockerfiles</strong>, as you should, I hope to be able to reconstruct everything quite easily. But, I remembered that switching from Windows to Vagrant was vital for my workflow. How to do that with <code>boot2docker</code>? I googled a bit and found instructions which seemed to be quite complicated. I tried them nevertheless, but they didn't work for me.</p>
+Back then when I quit, <code>boot2docker</code> had just been invented, but I didn't use it anymore, because other things kept me busy. Consequently, when I started using Docker, I had to set up <strong>VirtualBox</strong> and <strong>Vagrant</strong> manually. It's all different now, very easy and much more efficiently.</p>
 
-<p>For example: <a href="http://www.incrediblemolk.com/sharing-a-windows-folder-with-the-boot2docker-vm/" id="sharing-a-windows-folder-with-the-boot2docker-vm"><span>Sharing a Windows folder with the Boot2Docker VM</span></a>, replacing the <code>boot2docker.iso</code> to a not officially supported version. This new version has the <code>VirtualBox guest additions</code> which I knew from my past experience. But I didn't see this new logo which should confirm these guest additions. I checked and we checked and after 3 attempts, I gave up. </p>
+<p>Also, I set up a new machine with Windows 7 64-bit recently, so everything I did last year had to be moved to the new machine. As I worked with <strong>Dockerfiles</strong>, as you should, I hope to be able to reconstruct everything quite easily. But, I remembered that switching from Windows to Vagrant was vital for my workflow. How to do that with <code>boot2docker</code>? <br><br>
+
+I googled a bit and found instructions which seemed to be quite complicated. I tried them nevertheless, but they didn't work for me.</p>
+
+<p>For example: <a href="http://www.incrediblemolk.com/sharing-a-windows-folder-with-the-boot2docker-vm/" id="sharing-a-windows-folder-with-the-boot2docker-vm"><span>Sharing a Windows folder with the Boot2Docker VM</span></a>, replacing the <code>boot2docker.iso</code> to a not officially supported version. <br><br>
+
+This new version has the <code>VirtualBox guest additions</code> which I knew from my past experience, so this seemed reasonable, although it didn't quite understand what that meant. But I didn't see this new logo which should confirm these guest additions. I checked and rechecked and after 3 attempts, I gave up. </p>
 
 <p><img src="http://files.incrediblemolk.com/docker.08.png" alt="Docker" /></p>
 
-<p>Another attempt to solve this problem was presented by several people, for example the Tutum guys: <a href="http://blog.tutum.co/2014/11/05/how-to-use-docker-on-windows/" id="how-to-use-docker-on-windows"><span>How to Use Docker on Windows</span></a>. This solution looks technically sleek, but again I didn't manage to make it work. Also, a few words to explain what <strong>WINDOWS_IP</strong> should be and how to find it as well as <strong>WINDOWS_USERNAME</strong> wouldn't have been bad. I could find out that I was asked for a password for my WINDOWS_USERNAME, which set me at a loss: I don't use a password, so I introduced a password just to find out if this would help me, but I had no luck.</p>
+<p>Another approach to solve this problem was presented by several people, among them the Tutum guys: <a href="http://blog.tutum.co/2014/11/05/how-to-use-docker-on-windows/" id="how-to-use-docker-on-windows"><span>How to Use Docker on Windows</span></a>. <br><br>
+
+This solution looks technically sleek, but again I didn't manage to make it work. Also, a few words to explain what <strong>WINDOWS_IP</strong> should be and how to find it as well as <strong>WINDOWS_USERNAME</strong> wouldn't have been bad -- I understand they want to help the reader, don't they? <br><br>
+
+I found out I was asked for a password for my WINDOWS_USERNAME, which set me at a loss: I don't use a password, so I introduced a password just to see if this would help me, but I had no luck. So again frustration struck.</p>
 
 <pre><code>wget http://distro.ibiblio.org/tinycorelinux/5.x/x86/tcz/cifs-utils.tcz
 tce-load -i cifs-utils.tcz
@@ -49,7 +59,19 @@ mkdir /mnt/sharefolder
 sudo mount -t cifs //WINDOWS_IP/shared /mnt/sharefolder -o username=WINDOWS_USERNAME
 </code></pre>
 
-<p>There should be a very simple solution according to VirtualBox. If you start the GUI, click settings of the running boot2docker-vm, you will find an entry at the end of the list called <strong>Shared Folders</strong>. It is very easy to change this according to your needs. <br><br>For example, I wanted to set up a correspondence between my Windows folder <strong>D:\vagrant</strong> and a folder within the VirtualBox. Upon choosing this folder, VirtualBox associated a folder <strong>vagrant</strong>, so this looked promising. It didn't work with the running virtual machine, though, so -- if I remember correctly -- I exited, deleted the virtual machine and restarted. Unfortunately, VirtualBox had reset my setting back to <strong>C:\Users</strong>. <br><br>Next I exited and restarted and VirtualBox showed my corrected setting D:\vagrant, but inside I didn't have the expected folder vagrant, but again folder <strong>c</strong> with subfolder <strong>Users</strong> etc. I still experimented, but nothing changed, and after a soft reboot, I expected to see C:\Users again, but surprisingly VirtualBox showed two shared folders, both <strong>C:\Users</strong> and <strong>D:\vagrant</strong>. </p>
+<p>There should be a very simple solution according to VirtualBox. If you start the GUI, click settings of the running boot2docker-vm. There you will find an entry at the end of the list called <strong>Shared Folders</strong>. It is very easy to change this according to your needs. <br><br>
+
+For example, I wanted to set up a correspondence between my Windows folder <strong>D:\vagrant</strong> and a folder within the VirtualBox. Upon choosing this folder, VirtualBox associated a folder <strong>vagrant</strong>, so this looked promising. <br><br>
+
+It didn't work with the running virtual machine, though, so -- if I remember correctly -- I exited, deleted the virtual machine and restarted. Unfortunately, VirtualBox had reset my setting back to <strong>C:\Users</strong>. <br><br>
+
+Next I exited and restarted and VirtualBox showed my corrected setting D:\vagrant, but inside I didn't have the expected folder vagrant, but again folder <strong>c</strong> with subfolder <strong>Users</strong> etc., which is the default setting. <br><br>
+
+So by way of construction VirtualBox gives you <strong>a common Windows folder</strong> -- something a lot of people want to have, according to Google, and nobody seems to notice that it's already there. <br><br>
+
+The only thing I wanted to have is a different folder. Shouldn't be too complicated, if they offer it. After all its an Oracle product. Should work as advertised.<br><br>
+
+I still experimented, but nothing changed, and after a soft reboot, I expected to see C:\Users again, but surprisingly VirtualBox showed two shared folders, both <strong>C:\Users</strong> and <strong>D:\vagrant</strong>. </p>
 
 <p><img src="images/VirtualBox.png" alt="Docker" /></p>
 <p>Alas, still I don't see a folder vagrant within VirtualBox.</p>
@@ -70,7 +92,9 @@ sudo mount -t cifs //WINDOWS_IP/shared /mnt/sharefolder -o username=WINDOWS_USER
 
 <p> As far as I remember, I managed to set up a complex LAMP project with several containers, each one for memcached, Apache/PHP, and 3 for MySQL, just as an exercise. MaxScale was very fresh then, I planned to construct a load balancing, there were alternatives also the name of which I don't remember right now, but none of them produced satisfying results. And then something else required my attention full-time. </p>
 
-<p> I came back now because I wanted to investigate Chicago Boss, an Erlang framework, which should run in Windows, but didn't. So my idea was to continue in VirtualBox. Also, I wanted to know which database would be the best for me to use, and stumbled upon VoltDB which had a demonstration using boot2docker, so I was already set. And then I realized that I had forgotten everything, so I stepped back and started with the tutorial again, which has improved also a lot. <br><br>Enough for today, let me tell you tomorrow how to cope with the ssh error some people were complaining of, which hit me as well. </p>
+<p> I came back now because I wanted to investigate Chicago Boss, an Erlang framework, which should run in Windows, but didn't. So my idea was to continue in VirtualBox. Also, I wanted to know which database would be the best for me to use, and stumbled upon VoltDB which had a demonstration using boot2docker, so I was already set. And then I realized that I had forgotten everything, so I stepped back and started with the tutorial again, which has improved also a lot. <br><br>
+
+Enough for today, let me tell you tomorrow how to cope with the ssh error some people were complaining of, which hit me as well. </p>
 
 
 
