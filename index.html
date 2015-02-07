@@ -49,9 +49,9 @@ This new version has the <code>VirtualBox guest additions</code> which I knew fr
 
 <p>Another approach to solve this problem was presented by several people, among them the Tutum guys: <a href="http://blog.tutum.co/2014/11/05/how-to-use-docker-on-windows/" id="how-to-use-docker-on-windows"><span>How to Use Docker on Windows</span></a>. <br><br>
 
-This solution looks technically sleek, but again I didn't manage to make it work. Also, a few words to explain what <strong>WINDOWS_IP</strong> should be and how to find it as well as <strong>WINDOWS_USERNAME</strong> wouldn't have been bad -- I understand they want to help the reader, don't they? <br><br>
+This solution looks technically sleek, but again I didn't manage to make it work. Also, a few words to explain what <code>WINDOWS_IP</code> should be and how to find it as well as <code>WINDOWS_USERNAME</code> wouldn't have been bad -- I understand they want to help the reader, don't they? <br><br>
 
-I found out I was asked for a password for my WINDOWS_USERNAME, which set me at a loss: I don't use a password, so I introduced a password just to see if this would help me, but I had no luck. So again frustration struck.</p>
+I found out I was asked for a password for my <code>WINDOWS_USERNAME</code>, which set me at a loss: I don't use a password, so I introduced a password just to see if this would help, but I had no luck. So again frustration struck.</p>
 
 <pre><code>wget http://distro.ibiblio.org/tinycorelinux/5.x/x86/tcz/cifs-utils.tcz
 tce-load -i cifs-utils.tcz
@@ -59,42 +59,42 @@ mkdir /mnt/sharefolder
 sudo mount -t cifs //WINDOWS_IP/shared /mnt/sharefolder -o username=WINDOWS_USERNAME
 </code></pre>
 
-<p>There should be a very simple solution according to VirtualBox. If you start the GUI, click settings of the running boot2docker-vm. There you will find an entry at the end of the list called <strong>Shared Folders</strong>. It is very easy to change this according to your needs. <br><br>
+<p>There should be a very simple solution according to VirtualBox. If you start the GUI, click settings of the running <strong>boot2docker-vm</strong>. There you will find an entry at the end of the list called <code>Shared Folders</code>. It is very easy to change this according to your needs. <br><br>
 
-For example, I wanted to set up a correspondence between my Windows folder <strong>D:\vagrant</strong> and a folder within the VirtualBox. Upon choosing this folder, VirtualBox associated a folder <strong>vagrant</strong>, so this looked promising. <br><br>
+For example, I wanted to set up a correspondence between my Windows folder <code>D:\vagrant</code> and a folder within the VirtualBox. Upon choosing this folder, VirtualBox associated a folder <code>vagrant</code>, so this looked promising. <br><br>
 
-It didn't work with the running virtual machine, though, so -- if I remember correctly -- I exited, deleted the virtual machine and restarted. Unfortunately, VirtualBox had reset my setting back to <strong>C:\Users</strong>. <br><br>
+It didn't work with the running virtual machine, though, so -- if I remember correctly -- I exited, deleted the virtual machine and restarted. Unfortunately, VirtualBox had reset my setting back to <code>C:\Users</code>. <br><br>
 
-Next I exited and restarted and VirtualBox showed my corrected setting D:\vagrant, but inside I didn't have the expected folder vagrant, but again folder <strong>c</strong> with subfolder <strong>Users</strong> etc., which is the default setting. <br><br>
+Next I exited and restarted and VirtualBox showed my corrected setting D:\vagrant, but inside I didn't have the expected folder vagrant, but again folder <code>c</code> with subfolder <code>Users</code> etc., which is the default setting. <br><br>
 
-So by way of construction VirtualBox gives you <strong>a common Windows folder</strong> -- something a lot of people want to have, according to Google, and nobody seems to notice that it's already there. <br><br>
+So -- before we proceed, let me state this very clearly -- by way of construction VirtualBox gives you <code>a common Windows folder</code> -- something a lot of people want to have, according to Google, and nobody seems to notice that it's already there. <br><br>
 
-The only thing I wanted to have is a different folder. Shouldn't be too complicated, if they offer it. After all its an Oracle product. Should work as advertised.<br><br>
+The only thing I wanted to have is a different folder. It's a matter of taste more or less, but if you think about it, the right structure helps you keep your thoughts straight. You wouldn't like to put things in areas they don't belong, so this isn't a small deal after all. Shouldn't be too complicated, as they offer it already. After all its an Oracle product. Should work as advertised.<br><br>
 
-I still experimented, but nothing changed, and after a soft reboot, I expected to see C:\Users again, but surprisingly VirtualBox showed two shared folders, both <strong>C:\Users</strong> and <strong>D:\vagrant</strong>. </p>
+I still experimented, but nothing changed, and after a soft reboot, I expected to see C:\Users again, but surprisingly VirtualBox showed two shared folders, both <code>C:\Users</code> <strong>and</strong> <code>D:\vagrant</code>. </p>
 
 <p><img src="images/VirtualBox.png" alt="Docker" /></p>
 <p>Alas, still I don't see a folder vagrant within VirtualBox.</p>
 
 <p><img src="images/docker.png" alt="Docker" /></p>
 
-<p>By the way, you can see the <strong>IP address</strong> the VirtualBox can be addressed in this opening screen: <strong>192.168.59.103</strong>. It may happen that this number changes to 192.168.59.104, if you exit and restart, so if you get a connection error in your browser calling 192.168.59.103, watch here.
+<p>By the way, you can see the <code>IP address</code> the VirtualBox can be addressed in this opening screen: <code>192.168.59.103</code>. It may happen that this number changes to 192.168.59.104, if you exit and restart, so if you get a connection error in your browser calling 192.168.59.103, watch here.
 </p>
 
-<p>I finally gave up and decided to move the content of my vagrant folder to C:\Users\WERNER\vagrant, a subdirectory I created in my user folder, WERNER being the current user name on my new 64-bit machine, having 32584 elements with 3,73 GB -- I have no idea, what I have done there, but it sure is proof that I invested an awful lot of time and energy back then.</p>
+<p>I finally gave up and decided to move the content of my vagrant folder to <code>C:\Users\WERNER\vagrant</code>, a subdirectory I created in my user folder, <strong>WERNER</strong> being the current user name on my new 64-bit machine, having <strong>32584 elements</strong> with <strong>3,73 GB</strong> -- I have no idea, what I have done there, but it sure is proof that I invested an awful lot of time and energy back then.</p>
 
 <p><img src="images/copy.png" alt="Docker" /></p>
 
-<p> And here you can see the directory structure I set up a year ago; I started with Docker 0.8.1, used 0.9.0 and finally 0.9.1. <strong>Tutum</strong> was very new then, I was interested in <strong>LAMP</strong>, and the ppr file tells you that my favorite editor is PSPad -- the only one I know capable of correctly presenting class structures -- this is a PSPad project file. </p>
+<p> And here you can see the directory structure I set up a year ago; I started with Docker 0.8.1, used 0.9.0 and finally 0.9.1. <strong>Tutum</strong> was very new then, I was interested in <code>LAMP</code>, and the <code>ppr</code> file tells you that my favorite editor is <strong>PSPad</strong> -- the only one I know capable of correctly presenting PHP class structures -- this is a PSPad project file. In addition you can see, that I am a late hour worker and that the <code>ppr</code> file has been created in March 2014.</p>
 
 
 <p><img src="images/vagrant.png" alt="Docker" /></p>
 
-<p> As far as I remember, I managed to set up a complex LAMP project with several containers, each one for memcached, Apache/PHP, and 3 for MySQL, just as an exercise. MaxScale was very fresh then, I planned to construct a load balancing, there were alternatives also the name of which I don't remember right now, but none of them produced satisfying results. And then something else required my attention full-time. </p>
+<p> As far as I remember, I managed to set up a complex <code>LAMP</code> project with several containers, each one for <code>memcached</code>, <code>Apache/PHP</code>, and 3 for <code>MySQL</code>, just as an exercise. <code>MaxScale</code> was very fresh then, I planned to construct a database load balancing with it, there were alternatives also for this purpose the name of which I don't remember right now, but none of them produced satisfying results. And then something else required my attention full-time so that I dropped the whole study for the time being. </p>
 
-<p> I came back now because I wanted to investigate Chicago Boss, an Erlang framework, which should run in Windows, but didn't. So my idea was to continue in VirtualBox. Also, I wanted to know which database would be the best for me to use, and stumbled upon VoltDB which had a demonstration using boot2docker, so I was already set. And then I realized that I had forgotten everything, so I stepped back and started with the tutorial again, which has improved also a lot. <br><br>
+<p> I came back now because I wanted to investigate <code>Chicago Boss</code>, an Erlang framework which should run in Windows but didn't. So my idea was to continue in VirtualBox. Also, I wanted to know which database would be the best for me to use, and stumbled upon <code>VoltDB</code> which had a demonstration using boot2docker, so I was already set. And then I realized that I had forgotten everything about VirtualBox and Docker, so I stepped back and started with the Docker tutorial again, which has improved also a lot. <br><br>
 
-Enough for today, let me tell you tomorrow how to cope with the ssh error some people were complaining of, which hit me as well. </p>
+Enough for today, let me tell you tomorrow how to cope with the <strong>ssh error</strong> some people were complaining of, which hit me as well. </p>
 
 
 
