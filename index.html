@@ -25,7 +25,7 @@
         <hr>
 
         <section id="main_content">
-          <h3>First steps</h3>
+          <h3>VirtualBox and common Windows containers</h3>
 
 <p>I decided to jot down my experiences with Docker after noticing that I had forgotten most of the details I was very proficient with a year ago. <br><br>
 
@@ -37,7 +37,7 @@ I googled a bit and found instructions which seemed to be quite complicated. I t
 
 <p>For example: <a href="http://www.incrediblemolk.com/sharing-a-windows-folder-with-the-boot2docker-vm/" id="sharing-a-windows-folder-with-the-boot2docker-vm"><span>Sharing a Windows folder with the Boot2Docker VM</span></a>, replacing the <code>boot2docker.iso</code> to a not officially supported version. <br><br>
 
-This new version has the <code>VirtualBox guest additions</code> which I knew from my past experience, so this seemed reasonable, although it didn't quite understand what that meant. But I didn't see this new logo which should confirm these guest additions. I checked and rechecked and after 3 attempts, I gave up. </p>
+This new version has the <code>VirtualBox guest additions</code> which I knew from my past experience, so this seemed reasonable, although I didn't quite understand what that meant. But I didn't see this new logo which would confirm these guest additions. I checked and rechecked and after 3 attempts, I gave up. </p>
 
 <p><img src="http://files.incrediblemolk.com/docker.08.png" alt="Docker" /></p>
 
@@ -45,7 +45,7 @@ This new version has the <code>VirtualBox guest additions</code> which I knew fr
 
 This solution looks technically sleek, but again I didn't manage to make it work. Also, a few words to explain what <code>WINDOWS_IP</code> should be and how to find it as well as <code>WINDOWS_USERNAME</code> wouldn't have been bad -- I understand they want to help the reader, don't they? <br><br>
 
-I found out I was asked for a password for my <code>WINDOWS_USERNAME</code>, which set me at a loss: I don't use a password, so I introduced a password just to see if this would help, but I had no luck. So again frustration struck.</p>
+I found out I was asked for a password for my <code>WINDOWS_USERNAME</code>, which set me at a loss: I don't use a password on my very own private machine, so I introduced a password just to see if this would help, but I had no luck. So again frustration struck.</p>
 
 <pre><code>wget http://distro.ibiblio.org/tinycorelinux/5.x/x86/tcz/cifs-utils.tcz
 tce-load -i cifs-utils.tcz
@@ -59,13 +59,13 @@ For example, I wanted to set up a correspondence between my Windows folder <code
 
 It didn't work with the running virtual machine, though, so -- if I remember correctly -- I exited, deleted the virtual machine and restarted. Unfortunately, VirtualBox had reset my setting back to <code>C:\Users</code>. <br><br>
 
-Next I exited and restarted and VirtualBox showed my corrected setting D:\vagrant, but inside I didn't have the expected folder vagrant, but again folder <code>c</code> with subfolder <code>Users</code> etc., which is the default setting. <br><br>
+Next I exited and restarted and VirtualBox showed my corrected setting <code>D:\vagrant</code>, but inside I didn't have the expected folder vagrant, but again folder <code>c</code> with subfolder <code>Users</code> etc., which is the default setting. <br><br>
 
 So -- before we proceed, let me state this very clearly -- by way of construction VirtualBox gives you <code>a common Windows folder</code> for free -- something a lot of people want to have, according to Google, and nobody seems to notice that it's already there. <br><br>
 
-The only thing I wanted to have is a different folder. It's a matter of taste more or less, but if you think about it, the right structure helps you keep your thoughts straight. You wouldn't like to put things in areas they don't belong, so this isn't a small deal after all. Shouldn't be too complicated, as they offer it already. After all its an Oracle product. Should work as advertised.<br><br>
+The only thing I wanted to have is a <i>different</i> folder. It's a matter of taste more or less, but if you think about it, the right structure helps you keep your thoughts straight. You wouldn't like to put things in areas they don't belong, so this isn't a small deal after all. Shouldn't be too complicated, as they offer it already. After all its an Oracle product. Should work as advertised.<br><br>
 
-I still experimented, but nothing changed, and after a soft reboot, I expected to see C:\Users again, but surprisingly VirtualBox showed two shared folders, both <code>C:\Users</code> <strong>and</strong> <code>D:\vagrant</code>. </p>
+I still experimented, but nothing changed, and after a soft reboot, I expected to see <code>C:\Users</code>> again, but surprisingly VirtualBox showed two shared folders, both <code>C:\Users</code> <strong>and</strong> <code>D:\vagrant</code>. </p>
 
 <p><img src="images/VirtualBox.png" alt="Docker" /></p>
 <p>Alas, still I don't see a folder vagrant within VirtualBox.</p>
@@ -84,9 +84,9 @@ I still experimented, but nothing changed, and after a soft reboot, I expected t
 
 <p><img src="images/vagrant.png" alt="Docker" /></p>
 
-<p> As far as I remember, I managed to set up a complex <code>LAMP</code> project with several containers, each one for <code>memcached</code>, <code>Apache/PHP</code>, and 3 for <code>MySQL</code>, just as an exercise. <code>MaxScale</code> was very fresh then, I planned to construct a database load balancing with it, there were alternatives also for this purpose the name of which I don't remember right now, but none of them produced satisfying results. And then something else required my attention full-time so that I dropped the whole study for the time being. </p>
+<p> As far as I remember, I managed to set up a complex <code>LAMP</code> project with 5 containers, each one for <code>memcached</code>, <code>Apache/PHP</code>, and 3 for <code>MySQL</code>, just as an exercise. <code>MaxScale</code> was very fresh then, I planned to construct a database load balancing with it, there were alternatives also for this purpose the name of which I don't remember right now, but none of them produced satisfying results. And then something else required my attention full-time so that I dropped the whole study for the time being. </p>
 
-<p> I came back now because I wanted to investigate <code>Chicago Boss</code>, an Erlang framework which should run on Windows but didn't. So my idea was to continue in VirtualBox. Also, I wanted to know which database would be the best for me to use, and stumbled upon <code>VoltDB</code> which had a demonstration using boot2docker, so I was already set. And then I realized that I had forgotten everything about VirtualBox and Docker, so I stepped back and started with the Docker tutorial again, which has improved also a lot. <br><br>
+<p> I came back now because I wanted to investigate <code>Chicago Boss</code>, an Erlang framework which should run on Windows but didn't. So my idea was to continue in VirtualBox. Also, I wanted to know which database would be the best for me to use, and stumbled upon <code>VoltDB</code> which had a demonstration using <code>boot2docker</code>, so I was already set. And then I realized that I had forgotten everything about VirtualBox and Docker, so I stepped back and started with the Docker tutorial again, which also has improved a lot. <br><br>
 
 Enough for today, let me tell you tomorrow how to cope with the <strong>ssh error</strong> some people were complaining of, which hit me as well. </p>
 
