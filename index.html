@@ -53,6 +53,8 @@ mkdir /mnt/sharefolder
 sudo mount -t cifs //WINDOWS_IP/shared /mnt/sharefolder -o username=WINDOWS_USERNAME
 </code></pre>
 
+<h2>Surprise -- it's all there already</h2>
+
 <p>There should be a very simple solution according to VirtualBox. If you start the GUI, click settings of the running <strong>boot2docker-vm</strong>. There you will find an entry at the end of the list called <code>Shared Folders</code>. It is very easy to change this according to your needs. <br><br>
 
 For example, I wanted to set up a correspondence between my Windows folder <code>D:\vagrant</code> and a folder within the VirtualBox. Upon choosing this folder, VirtualBox associated a folder <code>vagrant</code>, so this looked promising. <br><br>
