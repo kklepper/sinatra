@@ -27,82 +27,10 @@
         <section id="main_content">
           <h3>VirtualBox and common Windows containers</h3>
 
-<p>I decided to jot down my experiences with Docker after noticing that I had forgotten most of the details I was very proficient with a year ago. <br><br>
-
-Back then when I quit, <code>boot2docker</code> had just been invented, but I didn't use it anymore, because other things kept me busy. Consequently, when I started using Docker, I had to set up <strong>VirtualBox</strong> and <strong>Vagrant</strong> manually. It's all different now, very easy and much more efficiently.</p>
-
-<p>Also, I set up a new machine with Windows 7 64-bit recently, so everything I did last year had to be moved to the new machine. As I worked with <strong>Dockerfiles</strong>, as you should, I hope to be able to reconstruct everything quite easily. But, I remembered that switching from Windows to Vagrant was vital for my workflow. How to do that with <code>boot2docker</code>? <br><br>
-
-I googled a bit and found instructions which seemed to be quite complicated. I tried them nevertheless, but they didn't work for me.</p>
-
-<p>For example: <a href="http://www.incrediblemolk.com/sharing-a-windows-folder-with-the-boot2docker-vm/" id="sharing-a-windows-folder-with-the-boot2docker-vm"><span>Sharing a Windows folder with the Boot2Docker VM</span></a>, replacing the <code>boot2docker.iso</code> to a not officially supported version. <br><br>
-
-This new version has the <code>VirtualBox guest additions</code> which I knew from my past experience, so this seemed reasonable, although I didn't quite understand what that meant. But I didn't see this new logo which would confirm these guest additions. I checked and rechecked and after 3 attempts, I gave up. </p>
-
-<p><img src="http://files.incrediblemolk.com/docker.08.png" alt="Docker" /></p>
-
-<p>Another approach to solve this problem was presented by several people, among them the Tutum guys: <a href="http://blog.tutum.co/2014/11/05/how-to-use-docker-on-windows/" id="how-to-use-docker-on-windows"><span>How to Use Docker on Windows</span></a>. <br><br>
-
-This solution looks technically sleek, but again I didn't manage to make it work. Also, a few words to explain what <code>WINDOWS_IP</code> should be and how to find it as well as <code>WINDOWS_USERNAME</code> wouldn't have been bad -- I understand they want to help the reader, don't they? <br><br>
-
-I found out I was asked for a password for my <code>WINDOWS_USERNAME</code>, which set me at a loss: I don't use a password on my very own private machine, so I introduced a password just to see if this would help, but I had no luck. So again frustration struck.</p>
-
-<pre><code>wget http://distro.ibiblio.org/tinycorelinux/5.x/x86/tcz/cifs-utils.tcz
-tce-load -i cifs-utils.tcz
-mkdir /mnt/sharefolder
-sudo mount -t cifs //WINDOWS_IP/shared /mnt/sharefolder -o username=WINDOWS_USERNAME
-</code></pre>
-
-<h2>Surprise -- it's all there already</h2>
-
-<p>There should be a very simple solution according to VirtualBox. If you start the GUI, click settings of the running <strong>boot2docker-vm</strong>. There you will find an entry at the end of the list called <code>Shared Folders</code>. It is very easy to change this according to your needs. <br><br>
-
-For example, I wanted to set up a correspondence between my Windows folder <code>D:\vagrant</code> and a folder within the VirtualBox. Upon choosing this folder, VirtualBox associated a folder <code>vagrant</code>, so this looked promising. <br><br>
-
-It didn't work with the running virtual machine, though, so -- if I remember correctly -- I exited, deleted the virtual machine and restarted. Unfortunately, VirtualBox had reset my setting back to <code>C:\Users</code>. <br><br>
-
-Next I exited and restarted and VirtualBox showed my corrected setting <code>D:\vagrant</code>, but inside I didn't have the expected folder vagrant, but again folder <code>c</code> with subfolder <code>Users</code> etc., which is the default setting. <br><br>
-
-So -- before we proceed, let me state this very clearly -- by way of construction VirtualBox gives you <code>a common Windows folder</code> for free -- something a lot of people want to have, according to Google, and nobody seems to notice that it's already there. <br><br>
-
-The only thing I wanted to have is a <em>different</em> folder. It's a matter of taste more or less, but if you think about it, the right structure helps you keep your thoughts straight. You wouldn't like to put things in areas they don't belong, so this isn't a small deal after all. Shouldn't be too complicated, as they offer it already. After all its an Oracle product. Should work as advertised.<br><br>
-
-I still experimented, but nothing changed, and after a soft reboot, I expected to see <code>C:\Users</code>> again, but surprisingly VirtualBox showed two shared folders, both <code>C:\Users</code> <strong>and</strong> <code>D:\vagrant</code>. </p>
-
-<p><img src="images/VirtualBox.png" alt="Docker" /></p>
-<p>Alas, still I don't see a folder vagrant within VirtualBox.</p>
-
-<p><img src="images/docker.png" alt="Docker" /></p>
-
-<p>By the way, you can see the <code>IP address</code> the VirtualBox can be addressed in this opening screen: <code>192.168.59.103</code>. It may happen that this number changes to 192.168.59.104, if you exit and restart, so if you get a connection error in your browser calling 192.168.59.103, watch here.
-</p>
-
-<h2>A workaround</h2>
-
-<p>I finally gave up and decided to move the content of my vagrant folder to <code>C:\Users\WERNER\vagrant</code>, a subdirectory I created in my user folder, WERNER being the current user name on my new 64-bit machine, having <em>32584 elements</em> with <em>3,73 GB</em> -- no idea, what I have done there, but it sure is proof that I invested an awful lot of time and energy back then.</p>
-
-<p> As far as I remember, I managed to set up a complex <code>LAMP</code> project with 5 containers, each one for <code>memcached</code>, <code>Apache/PHP</code>, and 3 for <code>MySQL</code>, just as an exercise. <code>MaxScale</code> was very fresh then, I planned to construct a database load balancing with it, there were alternatives also for this purpose the name of which I don't remember right now, but none of them produced satisfying results. And then something else required my attention full-time so that I dropped the whole study for the time being. <br><br>
-
-To make things look proper, we just use an old trick and soft link the directory <code>/c/Users/WERNER/vagrant</code> to the "directory" <code>/home/docker/vagrant</code>:</p>
-
-<h2>git add doesn't like soft links</h2>
-
-<p>I write this in the directory <code>/c/Users/WERNER/sinatra</code>, which in turn is coupled with my Github repository <code>sinatra</code> which in turn is coupled with my docker repository <code>sinatra_debian</code>. <br><br>
-
-To set things straight, I soft link this one to <code>/home/docker/sinatra</code> as well and change to this directory. <br><br>
-
-Having produced another image, I expected git to add this new image from the soft link. I was wrong. git cannot do that. I have to return to the original directory in order to <code>add</code> and <code>commit</code> and <code>push</code>. Oh boy!</p>
-
-<h2>The benefit</h2>
-
-<p> With this solution in place, I can use all my Windows tools I am productive with and keep the results outside of the temporary VirtualBox scenery, as I did last year, which is the reason why I had no trouble finding my workbase without starting VirtualBox and without the need to push everything of interest to the cloud. <br><br>
-
-Just to let you know: I am clever enough to work with vi, but frankly this is not what I understand as a boost in productivity, to not speak of simple manipulation of graphic objects within VirtualBox like the illustrations in this article. <br><br>
-
-This gives you an idea of the need of a common folder. For example, I would have hated to type this text character for character, although I'm not slow -- it is just tedious and unproductive. Instead, I prefer to dictate. It's easy, if you are on Windows. And it's great, if you get it in VirtualBox as well. </p>
-
-Enough for today, let me tell you tomorrow how to cope with the <strong>ssh error</strong> some people were complaining of, which hit me as well. </p>
-
+<h4>Please note: There is a very clear instruction in the Docker Userguide chapter <a href="http://docs.docker.com/userguide/dockervolumes//" id="sharing-a-windows-folder-with-the-boot2docker-vm"><span>Managing Data in Containers</span></a>, section <b>Mount a Host Directory as a Data Volume</b>:
+<p>
+<h5>Note: If you are using Boot2Docker, your Docker daemon only has limited access to your OSX/Windows filesystem. Boot2Docker tries to auto-share your /Users (OSX) or C:\Users (Windows) directory - and so you can mount files or directories using docker run -v /Users/<path>:/<container path> ... (OSX) or docker run -v /c/Users/<path>:/<container path ... (Windows). All other paths come from the Boot2Docker virtual machine's filesystem.</h5>
+</h4></p>
 
 
 <p></p>
